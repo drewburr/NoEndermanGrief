@@ -1,16 +1,12 @@
 # DO NOT CHANGE VERSION
 version: 1.0.6
-# change to false to stop auto-update-check
-auto_update_check: true
 # set to true before sending a log about an issue.
 # logs trace data required to pinpoint where errors are.
 debug: false
 # Set the language to use, en_US, nl_NL, lol_US, fr_FR, de_DE, cs-CZ, pt_BR
 lang: en_US
-# 
+#
 console:
-# Enables fancy ANSI colors in console. (Disable if you're getting weird characters in the console)
-  colorful_console: true
 # Should NEG use it's full name or NEG in console messages?
   longpluginname: true
 # Set if Enderman can pickup blocks. false=no grief

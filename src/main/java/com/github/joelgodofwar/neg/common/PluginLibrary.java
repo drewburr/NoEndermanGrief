@@ -13,21 +13,6 @@ import com.google.common.collect.ImmutableList;
 public class PluginLibrary {
 
 	/**
-	 * The minimum version MoreMobHeads has been tested with.
-	 */
-	public static final String MINIMUM_MINECRAFT_VERSION = "1.14";
-
-	/**
-	 * The maximum version MoreMobHeads has been tested with.
-	 */
-	public static final String MAXIMUM_MINECRAFT_VERSION = "1.21";
-
-	/**
-	 * The date (with ISO 8601 or YYYY-MM-DD) when the most recent version (1.20.4) was released.
-	 */
-	public static final String MINECRAFT_LAST_RELEASE_DATE = "2023-12-07";
-
-	/**
 	 * Plugins that are currently incompatible with MoreMobHeads.
 	 */
 	public static final List<String> INCOMPATIBLE = ImmutableList.of("");
@@ -71,10 +56,6 @@ public class PluginLibrary {
 	public static final ReportType REPORT_HEAD_URL_ERROR = new ReportType("Malformed URL Error");
 	public static final ReportType REPORT_BLOCKHEAD_LOAD_ERROR = new ReportType("Cannot load BlockHeads file");
 
-	public static final ReportType REPORT_METRICS_IO_ERROR = new ReportType("Unable to enable metrics due to network problems.");
-	public static final ReportType REPORT_METRICS_GENERIC_ERROR = new ReportType("Unable to enable metrics due to network problems.");
-
-	public static final ReportType REPORT_CANNOT_PARSE_MINECRAFT_VERSION = new ReportType("Unable to retrieve current Minecraft version. Assuming %s");
 	public static final ReportType REPORT_CANNOT_DETECT_CONFLICTING_PLUGINS = new ReportType("Unable to detect conflicting plugin versions.");
 	public static final ReportType REPORT_CANNOT_REGISTER_COMMAND = new ReportType("Cannot register command %s: %s");
 
@@ -83,7 +64,6 @@ public class PluginLibrary {
 
 	public static final ReportType REPORT_CANNOT_GET_HEXNICK = new ReportType("Cannot get Nick from HexNicks.");
 
-	public static final ReportType REPORT_METRICS_LOAD_ERROR = new ReportType("Cannot load bStats Metrics.");
 
 	public static final ReportType REPORT_TAB_COMPLETE_ERROR = new ReportType("Error parsing Tab Complete.");
 	public static final ReportType UNHANDLED_COMMAND_ERROR = new ReportType("Command had an Unhandled exception.");

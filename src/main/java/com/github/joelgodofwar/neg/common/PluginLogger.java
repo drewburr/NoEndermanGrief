@@ -4,7 +4,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 
 import com.github.joelgodofwar.neg.NoEndermanGrief;
 
@@ -40,12 +39,10 @@ public class PluginLogger {
 	 * @param args Arguments to format in
 	 */
 	public void log(Level level, String message, Object... args) {
-		String pluginName = ChatColor.RESET + "[" + ChatColor.YELLOW + mmh.getName() + ChatColor.RESET + "] ";
+		String pluginName = "[" + mmh.getName() + "] ";
 		if (!areAllArgsBlank(args)) {
-			//logger.log(level, applyColorFormatting(MessageFormat.format(message, args)));
-			Bukkit.getConsoleSender().sendMessage(pluginName + String.format(pluginName + message, args));
+			Bukkit.getConsoleSender().sendMessage(pluginName + String.format(message, args));
 		} else {
-			//logger.log(level, applyColorFormatting(message));
 			Bukkit.getConsoleSender().sendMessage(pluginName + message);
 		}
 	}
@@ -114,18 +111,6 @@ public class PluginLogger {
 	 */
 	public void warn(String message, Object... args) {
 		log(Level.WARNING, "[Warning] " + message, args);
-	}
-
-	/**
-	 * Logs a warning message to console with the WARNING level if the Minecraft version is at or above a specified version.
-	 * @param version The Minecraft version to compare against.
-	 * @param message Warning message to log.
-	 * @param args Arguments to format in the warning message.
-	 */
-	public void warnAbove(MinecraftVersion version, String message, Object... args) {
-		if (version.atOrAbove()) {
-			log(Level.WARNING, message, args);
-		}
 	}
 
 	/**

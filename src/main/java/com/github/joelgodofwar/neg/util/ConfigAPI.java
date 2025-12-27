@@ -48,12 +48,6 @@ public class ConfigAPI  {
 			NoEndermanGrief.debug = false;
 			//log("debug=false", plugin);
 		}
-		String daString2 = config.getString("auto_update_check").replace("'", "") + ",";
-		if(daString2.contains("true")){
-			//NoEndermanGrief.UpdateCheck = true;
-		}else{
-			//NoEndermanGrief.UpdateCheck = false;
-		}
 		String daString3 = config.getString("skeleton_horse_spawn").replace("'", "") + ",";
 		if(daString3.contains("true")){
 			//NoEndermanGrief.allowSpawnSH = true;
@@ -80,7 +74,6 @@ public class ConfigAPI  {
 		}
 		String daString7 = config.getString("lang", "en_US").replace("'", "");
 		NoEndermanGrief.daLang = daString7;
-		if(NoEndermanGrief.debug){log("UpdateCheck = " + NoEndermanGrief.UpdateCheck, plugin);} //TODO: Logger
 		if(sender != null){
 			sender.sendMessage(ChatColor.YELLOW + plugin.getName() + ChatColor.WHITE + " Configs Reloaded");
 		}
