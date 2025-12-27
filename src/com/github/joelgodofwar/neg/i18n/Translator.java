@@ -13,19 +13,21 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
 
-
 public class Translator {
 	private static String lang;
 	private static String dataFolder;
+
 	@SuppressWarnings("static-access")
-	public Translator(String lang, String dataFolder){
+	public Translator(String lang, String dataFolder) {
 		this.lang = formatLanguageCode(lang);
 		this.dataFolder = dataFolder;
 	}
+
 	public static String get(String key, String... defaultValue) {
 		Translator language = new Translator(lang, dataFolder);
-	    return language.get(lang, key, defaultValue);
+		return language.get(lang, key, defaultValue);
 	}
+
 	public String get(String lang, String key, String... defaultValue) {
 		String value = Arrays.stream(defaultValue).findFirst().orElse(null);
 		ResourceBundle bundle = ResourceBundle.getBundle("lang/lang", new Locale(lang));
@@ -34,7 +36,8 @@ public class Translator {
 		} catch (MissingResourceException e) {
 			// Key not found in bundle
 		}
-		File langFile = new File(dataFolder + File.separatorChar + "lang" + File.separatorChar + "" + lang + ".properties");
+		File langFile = new File(
+				dataFolder + File.separatorChar + "lang" + File.separatorChar + "" + lang + ".properties");
 		Properties props = new Properties();
 		try {
 			if (langFile.exists()) {
@@ -46,7 +49,8 @@ public class Translator {
 					sortPropertiesFile(langFile, props);
 				}
 			} else {
-				// File doesn't exist, use default value from bundle or null if defaultValue is not present
+				// File doesn't exist, use default value from bundle or null if defaultValue is
+				// not present
 				return value;
 			}
 		} catch (IOException e) {
@@ -56,13 +60,14 @@ public class Translator {
 		value = props.getProperty(key);
 		return value;
 	}
+
 	public void sortPropertiesFile(File file, Properties props) throws IOException {
 		// Create a TreeMap to store the sorted properties
-	    Map<String, String> sortedProps = new TreeMap<>();
-	    // Iterate over the Properties object and add each key-value pair to the TreeMap
-	    for (String key : props.stringPropertyNames()) {
-	        sortedProps.put(key, props.getProperty(key));
-	    }
+		Map<String, String> sortedProps = new TreeMap<>();
+		// Iterate over the Properties object and add each key-value pair to the TreeMap
+		for (String key : props.stringPropertyNames()) {
+			sortedProps.put(key, props.getProperty(key));
+		}
 		// Clear the properties file
 		try (FileOutputStream outputStream = new FileOutputStream(file)) {
 			outputStream.getChannel().truncate(0);
@@ -74,8 +79,9 @@ public class Translator {
 			}
 		}
 	}
+
 	public String formatLanguageCode(String lang) {
-	    String[] parts = lang.split("_");
-	    return parts[0].toLowerCase() + "_" + parts[1].toUpperCase();
+		String[] parts = lang.split("_");
+		return parts[0].toLowerCase() + "_" + parts[1].toUpperCase();
 	}
 }
