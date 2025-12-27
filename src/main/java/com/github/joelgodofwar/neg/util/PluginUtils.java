@@ -18,34 +18,35 @@ import org.yaml.snakeyaml.Yaml;
 
 public class PluginUtils {
 
-	public static Map<String, Object> getInfo(Plugin plugin) {
+    public static Map<String, Object> getInfo(Plugin plugin) {
         Map<String, Object> info = new LinkedHashMap<>();
 
         // Get plugin information
         PluginDescriptionFile description = plugin.getDescription();
         File file = null;
         try {
-	        Method getFileMethod = JavaPlugin.class.getDeclaredMethod("getFile");
-	        getFileMethod.setAccessible(true);
-	        file = new File(((JavaPlugin) Bukkit.getServer().getPluginManager().getPlugin("" + description.getName())).getClass().getProtectionDomain().getCodeSource().getLocation().getFile());
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        
+            Method getFileMethod = JavaPlugin.class.getDeclaredMethod("getFile");
+            getFileMethod.setAccessible(true);
+            file = new File(((JavaPlugin) Bukkit.getServer().getPluginManager().getPlugin("" + description.getName()))
+                    .getClass().getProtectionDomain().getCodeSource().getLocation().getFile());
+        } catch (IllegalArgumentException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (SecurityException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
         // Plugin name and version
         info.put("Name", description.getName());
         info.put("Version", description.getVersion());
 
         // File name
         info.put("FileName", "" + file.getName());
-        //info.put("FileName", "" + getJarNameByPluginName(description.getName()));
+        // info.put("FileName", "" + getJarNameByPluginName(description.getName()));
 
         // Main class
         info.put("Main", description.getMain());
@@ -84,8 +85,8 @@ public class PluginUtils {
 
         return info;
     }
-	
-	private static Map<String, String> pluginJarNames = new HashMap<>();
+
+    private static Map<String, String> pluginJarNames = new HashMap<>();
 
     public static void loadPluginJarNames() {
         File pluginsFolder = new File("plugins");
