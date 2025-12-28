@@ -104,8 +104,8 @@ public class ConfigManager {
 		MobGriefControl.LOGGER.log("Config file version=" + currentVersion + " expected=" + configVersion);
 
 		// If version is null, set it to current plugin version
-		if (currentVersion == null || currentVersion.equals("null")) {
-			MobGriefControl.LOGGER.log("Config version is null, setting to " + configVersion);
+		if (currentVersion == null || currentVersion.equals("0.0.0")) {
+			MobGriefControl.LOGGER.log("Config version is unset, setting to " + configVersion);
 			plugin.getConfig().set("version", configVersion);
 			try {
 				plugin.getConfig().save(new File(plugin.getDataFolder(), "config.yml"));

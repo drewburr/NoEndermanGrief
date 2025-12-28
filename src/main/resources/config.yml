@@ -1,5 +1,5 @@
 # DO NOT CHANGE VERSION
-version: null
+version: 0.0.0
 # set to true before sending a log about an issue.
 # logs trace data required to pinpoint where errors are.
 debug: false
