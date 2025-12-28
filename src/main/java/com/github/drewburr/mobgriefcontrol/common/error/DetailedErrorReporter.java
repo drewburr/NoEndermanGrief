@@ -123,7 +123,7 @@ public class DetailedErrorReporter implements ErrorReporter {
 		try {
 			return plugin.getName();
 		} catch (LinkageError e) {
-			return "MoreMobHeads";
+			return "MobGriefControl";
 		}
 	}
 

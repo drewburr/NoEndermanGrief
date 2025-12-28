@@ -13,7 +13,7 @@ import com.github.drewburr.mobgriefcontrol.MobGriefControl;
  */
 public class PluginLogger {
 	private Logger logger = Logger.getLogger("Minecraft");
-	private MobGriefControl mmh;
+	private MobGriefControl plugin;
 
 	/**
 	 * Constructor for the PluginLogger class.
@@ -21,7 +21,7 @@ public class PluginLogger {
 	 */
 	public PluginLogger(MobGriefControl plugin) {
 		logger = plugin.getLogger();
-		mmh = plugin;
+		this.plugin = plugin;
 	}
 
 	/**
@@ -39,7 +39,7 @@ public class PluginLogger {
 	 * @param args Arguments to format in
 	 */
 	public void log(Level level, String message, Object... args) {
-		String pluginName = "[" + mmh.getName() + "] ";
+		String pluginName = "[" + this.plugin.getName() + "] ";
 		if (!areAllArgsBlank(args)) {
 			Bukkit.getConsoleSender().sendMessage(pluginName + String.format(message, args));
 		} else {
@@ -80,7 +80,7 @@ public class PluginLogger {
 	 * @param args Arguments to format in the debug message.
 	 */
 	public void debug(String message, Object... args) {
-		if (mmh.debug) {
+		if (MobGriefControl.debug) {
 			log("[Debug] " + message, args);
 		}
 	}
@@ -91,7 +91,7 @@ public class PluginLogger {
 	 * @param ex Exception to log.
 	 */
 	public void debug(String message, Throwable ex) {
-		if (mmh.debug) {
+		if (MobGriefControl.debug) {
 			log(Level.WARNING, "[Debug] " + message, ex);
 		}
 	}

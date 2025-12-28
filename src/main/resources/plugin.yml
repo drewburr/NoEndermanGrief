@@ -1,7 +1,7 @@
 name: MobGriefControl
 main: com.github.drewburr.mobgriefcontrol.MobGriefControl
 version: 2.0.0
-author: JoelYahwehOfWar
+author: drewburr
 api-version: '1.21.11'
 folia-supported: true
 
@@ -21,5 +21,5 @@ permissions:
     description: Shows player if there is an update on login.
     default: op
   mobgriefcontrol.toggledebug:
-    description: Allows the player to use "/mmh toggledebug" command.
+    description: Allows the player to use "/mobgriefcontrol toggledebug" command.
     default: op
