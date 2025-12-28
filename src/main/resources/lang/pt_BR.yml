@@ -9,11 +9,11 @@ skeleton_horse: Esqueleto Cavalo tentou desovar em
 phantom: Phantom tentou gerar em 
 pillager_patrol: Patrulha de Pillager tentou desovar em 
 wandering_trader: Trader Errante tentou desovar em 
-enderman_grief_set: enderman_grief foi definido como
-enderman_grief_current: O Enderman Grief está atualmente definido como [setting]
+do_enderman_grief_set: do_enderman_grief foi definido como
+do_enderman_grief_current: O Enderman Grief está atualmente definido como [setting]
 enderman_will: Endermen vai pegar blocos.
 enderman_wont: Endermen não vai pegar blocos.
-skeleton_horse_set: skeleton_horse_spawn foi definido como
+skeleton_horse_set: spawn_skeleton_horse foi definido como
 skeleton_horse_current: O Skeleton Horse Spawn está atualmente definido para [setting]
 skeleton_horse_will: skeleton_horse surgirá durante tempestades.
 skeleton_horse_wont: skeleton_horse não aparecerá durante tempestades.
@@ -21,20 +21,20 @@ wandering_trader_set: O surgimento de comerciantes errantes foi definido como
 wandering_trader_current: Os comerciantes errantes estão atualmente configurados para [setting]
 wandering_trader_will: comerciante errante irá aparecer.
 wandering_trader_wont: comerciante errante não irá aparecer.
-creeper_set: creeper_grief foi definido como
+creeper_set: do_creeper_grief foi definido como
 creeper_current: Creeper Grief está atualmente definido como [setting]
 creeper_will: Trepadeiras destruirão blocos.
 creeper_wont: Trepadeiras não destruirão blocos.
-ghast_set: ghast_grief foi definido como
-ghast_current: ghast_grief está atualmente definido como [setting]
+ghast_set: do_ghast_grief foi definido como
+ghast_current: do_ghast_grief está atualmente definido como [setting]
 ghast_will: Ghasts destruirão blocos.
 ghast_wont: Ghasts não destruirão blocos.
-phantom_set: phantom_spawn foi definido como
-phantom_current: phantom_spawn está atualmente definido como [setting]
+phantom_set: spawn_phantom foi definido como
+phantom_current: spawn_phantom está atualmente definido como [setting]
 phantom_will: O fantasma aparecerá.
 phantom_wont: O fantasma não aparecerá.
-pillager_patrol_set: pillager_patrol_spawn foi definido como
-pillager_patrol_current: pillager_patrol_spawn está atualmente definido como [setting]
+pillager_patrol_set: spawn_pillager_patrol foi definido como
+pillager_patrol_current: spawn_pillager_patrol está atualmente definido como [setting]
 pillager_patrol_will: A patrulha de saqueador aparece.
 pillager_patrol_wont: O Pillager Patrol não aparece.
 help_endermen: Defina se enderman rouba ou não.

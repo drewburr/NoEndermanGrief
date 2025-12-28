@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# NoEndermanGrief Build Script
+# MobGriefControl Build Script
 # Compiles the Minecraft plugin and packages it into a JAR file
 
 set -e  # Exit on error
@@ -13,8 +13,8 @@ BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
 # Configuration
-PROJECT_NAME="NoEndermanGrief"
-MAIN_CLASS="com.github.joelgodofwar.neg.NoEndermanGrief"
+PROJECT_NAME="MobGriefControl"
+MAIN_CLASS="com.github.drewburr.mobgriefcontrol.MobGriefControl"
 SOURCE_DIR="src"
 BUILD_DIR="build"
 CLASSES_DIR="$BUILD_DIR/classes"

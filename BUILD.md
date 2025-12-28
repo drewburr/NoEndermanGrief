@@ -44,7 +44,7 @@ The script will:
 4. Copy resources (plugin.yml, config.yml, lang/)
 5. Package everything into a JAR file
 
-The compiled plugin will be available at: `dist/NoEndermanGrief-<version>.jar`
+The compiled plugin will be available at: `dist/MobGriefControl-<version>.jar`
 
 ### Option 2: Manual compilation
 
@@ -63,7 +63,7 @@ cp -r lang build/classes/
 
 # Create JAR
 cd build/classes
-jar -cf ../../dist/NoEndermanGrief.jar .
+jar -cf ../../dist/MobGriefControl.jar .
 cd ../..
 ```
 
@@ -72,7 +72,7 @@ cd ../..
 Copy the compiled JAR file from `dist/` to your Minecraft server's `plugins/` directory:
 
 ```bash
-cp dist/NoEndermanGrief-*.jar /path/to/server/plugins/
+cp dist/MobGriefControl-*.jar /path/to/server/plugins/
 ```
 
 Then restart or reload your server.
@@ -107,5 +107,5 @@ For rapid development, you can create a symlink or use a script to automatically
 
 ```bash
 # Example: Auto-copy after build
-./build.sh && cp dist/NoEndermanGrief-*.jar ~/minecraft-server/plugins/
+./build.sh && cp dist/MobGriefControl-*.jar ~/minecraft-server/plugins/
 ```

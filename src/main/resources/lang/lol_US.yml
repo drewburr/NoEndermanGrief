@@ -9,8 +9,8 @@ skeleton_horse: Skeley hors trid 2 spawn @
 phantom: fantim trid 2 spawn @ 
 pillager_patrol: Pilagr pawtrl tryd 2 spon @ 
 wandering_trader: Wanderin tradr trid 2 spawn @
-enderman_grief_set: endyman_greef haz ben sit 2 
-enderman_grief_current: Endyman Greef iz purrently sit 2 [setting]
+do_enderman_grief_set: endyman_greef haz ben sit 2 
+do_enderman_grief_current: Endyman Greef iz purrently sit 2 [setting]
 enderman_will: Endyman wil picup blockz.
 enderman_wont: Endyman wil not picup blockz
 skeleton_horse_set: skelyton_hors_spwn haz ben sit 2 
@@ -24,16 +24,16 @@ creeper_set: creepy_greef haz ben sit 2
 creeper_current: Creepy greef iz purrently sit 2 [setting]
 creeper_will: Creepys wil hid blockz.
 creeper_wont: Creepys no hid blockz
-ghast_set: ghast_grief haz ben sit 2 
-ghast_current: ghast_grief iz purrently sit 2 [setting]
+ghast_set: do_ghast_grief haz ben sit 2 
+ghast_current: do_ghast_grief iz purrently sit 2 [setting]
 ghast_will: Gosts wil hid blockz.
 ghast_wont: Gosts no hid blockz
-phantom_set: phantom_spawn haz ben sit 2 
-phantom_current: phantom_spawn iz purrently sit 2 [setting]
+phantom_set: spawn_phantom haz ben sit 2 
+phantom_current: spawn_phantom iz purrently sit 2 [setting]
 phantom_will: fantim wil spwn.
 phantom_wont: Fantim wil not spwn.
-pillager_patrol_set: pillager_patrol_spawn haz ben sit 2 
-pillager_patrol_current: pillager_patrol_spawn iz purrently sit 2 [setting]
+pillager_patrol_set: spawn_pillager_patrol haz ben sit 2 
+pillager_patrol_current: spawn_pillager_patrol iz purrently sit 2 [setting]
 pillager_patrol_will: pilagr pawtrl wil spwn.
 pillager_patrol_wont: pilagr pawtrl wil not spwn.
 help_endermen: Sit ef endyman greef o not.
