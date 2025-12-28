@@ -62,7 +62,6 @@ public class ReloadCommandHandler implements CommandHandler {
 				plugin.getConfig().set("auto_update_check", oldconfig.get("auto_update_check", true));
 				plugin.getConfig().set("debug", oldconfig.get("debug", false));
 				plugin.getConfig().set("lang", oldconfig.get("lang", "en_US"));
-				plugin.getConfig().set("console.longpluginname", oldconfig.get("console.longpluginname", true));
 				// Migrate old keys to new descriptive names
 				plugin.getConfig().set("do_enderman_pickup", oldconfig.get("do_enderman_grief", true));
 				plugin.getConfig().set("do_creeper_explode", oldconfig.get("do_creeper_grief", true));

@@ -92,7 +92,6 @@ version: 2.0.0
 debug: false
 lang: en_US
 auto_update_check: true
-console.longpluginname: true
 
 # Mob griefing controls (false = disabled, true = enabled)
 do_enderman_pickup: true

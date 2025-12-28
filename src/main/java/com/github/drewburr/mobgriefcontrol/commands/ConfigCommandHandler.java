@@ -21,7 +21,6 @@ public class ConfigCommandHandler implements CommandHandler {
 		sender.sendMessage("  auto_update_check: " + plugin.getConfig().getBoolean("auto_update_check"));
 		sender.sendMessage("  debug: " + plugin.getConfig().getBoolean("debug"));
 		sender.sendMessage("  lang: " + plugin.getConfig().getString("lang"));
-		sender.sendMessage("  console.longpluginname: " + plugin.getConfig().getBoolean("console.longpluginname"));
 		sender.sendMessage("  do_enderman_pickup: " + plugin.getConfig().getBoolean("do_enderman_pickup"));
 		sender.sendMessage("  do_creeper_explode: " + plugin.getConfig().getBoolean("do_creeper_explode"));
 		sender.sendMessage("  do_ghast_explode: " + plugin.getConfig().getBoolean("do_ghast_explode"));

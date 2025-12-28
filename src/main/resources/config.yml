@@ -5,10 +5,6 @@ version: 2.0.0
 debug: false
 # Set the language to use, en_US, nl_NL, lol_US, fr_FR, de_DE, cs-CZ, pt_BR
 lang: en_US
-#
-console:
-# Should mobgriefcontrol use it's full name or mobgriefcontrol in console messages?
-  longpluginname: true
 # Set if Enderman can pickup blocks. false=no pickup
 do_enderman_pickup: true
 # Set if Creeper explosions can destroy blocks. false=no explosions

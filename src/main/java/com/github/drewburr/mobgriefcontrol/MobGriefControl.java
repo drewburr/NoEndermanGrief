@@ -69,7 +69,6 @@ public class MobGriefControl extends JavaPlugin implements Listener{
 	YamlConfiguration oldconfig = new YamlConfiguration();
 	String configVersion = "2.0.0";
 	//String langVersion = "2.0.0";
-	String pluginName = THIS_NAME;
 	Translator lang2;
 	public String jarfilename = this.getFile().getAbsoluteFile().toString();
 	public static DetailedErrorReporter reporter;
@@ -86,11 +85,6 @@ public class MobGriefControl extends JavaPlugin implements Listener{
 		lang2 = new Translator(daLang, getDataFolder().toString());
 		THIS_NAME = this.getPluginMeta().getName();
 		THIS_VERSION = this.getPluginMeta().getVersion();
-		if(!getConfig().getBoolean("console.longpluginname", true)) {
-			pluginName = "mobgriefcontrol";
-		}else {
-			pluginName = THIS_NAME;
-		}
 
 		LOGGER = new PluginLogger(this);
 
@@ -157,7 +151,6 @@ public class MobGriefControl extends JavaPlugin implements Listener{
 				}
 				getConfig().set("debug", oldconfig.get("debug", false));
 				getConfig().set("lang", oldconfig.get("lang", "en_US"));
-				getConfig().set("console.longpluginname", oldconfig.get("console.longpluginname", true));
 				// Migrate old keys to new descriptive names
 				getConfig().set("do_enderman_pickup", oldconfig.get("do_enderman_grief", true));
 				getConfig().set("do_creeper_explode", oldconfig.get("do_creeper_grief", true));
@@ -195,7 +188,6 @@ getConfig().load(new File(getDataFolder(), "config.yml"));
 			LOGGER.debug("debug=" + getConfig().getBoolean("debug"));
 			LOGGER.debug("lang=" + getConfig().getString("lang"));
 
-			LOGGER.debug("console.longpluginname=" + getConfig().getBoolean("console.longpluginname"));
 			LOGGER.debug("do_enderman_pickup=" + getConfig().getBoolean("do_enderman_pickup"));
 			LOGGER.debug("do_creeper_explode=" + getConfig().getBoolean("do_creeper_explode"));
 			LOGGER.debug("do_ghast_explode=" + getConfig().getBoolean("do_ghast_explode"));
@@ -319,32 +311,6 @@ getConfig().load(new File(getDataFolder(), "config.yml"));
 
 	public boolean isCorrectVersion(){
 		// NMS version checking removed - always return true for Paper API compatibility
-		return true;
-	}
-
-	public boolean saveConfig(boolean update, boolean Debug, boolean Console, boolean Longname, boolean Ender, boolean Ghast, boolean Creeper, String Lang) {
-		//	debug	daLang	colorful_console
-		debug = Debug;
-		daLang = Lang;
-		if(!Longname) {
-			pluginName = "mobgriefcontrol";
-		}else {
-			pluginName = THIS_NAME;
-		}
-		getConfig().set("debug", Debug);
-		getConfig().set("lang", Lang);
-		getConfig().set("console.longpluginname", Longname);
-		getConfig().set("do_enderman_grief", Ender);
-		getConfig().set("do_creeper_grief", Creeper);
-		getConfig().set("do_ghast_grief", Ghast);
-		try {
-			getConfig().save(new File(getDataFolder(), "config.yml"));
-		} catch (IOException e) {
-			LOGGER.warn("Could not save settings to config.yml");
-			e.printStackTrace();
-			return false;
-		}
-		LOGGER.log("config.yml has been updated");
 		return true;
 	}
 
