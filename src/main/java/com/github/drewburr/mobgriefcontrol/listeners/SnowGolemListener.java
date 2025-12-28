@@ -1,9 +1,9 @@
 package com.github.drewburr.mobgriefcontrol.listeners;
 
-import org.bukkit.entity.EntityType;
+import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityChangeBlockEvent;
+import org.bukkit.event.block.EntityBlockFormEvent;
 
 import com.github.drewburr.mobgriefcontrol.MobGriefControl;
 import com.github.drewburr.mobgriefcontrol.common.PluginLibrary;
@@ -17,9 +17,13 @@ public class SnowGolemListener implements Listener {
 	}
 
 	@EventHandler
-	public void onEntityChangeBlock(EntityChangeBlockEvent event) {
+	public void onEntityBlockForm(EntityBlockFormEvent event) {
 		try {
-			if (event.getEntity().getType() == EntityType.SNOWMAN) {
+			// Check if the entity is a snow golem and it's forming snow
+			if (event.getEntity() != null &&
+				event.getEntity().getType() == org.bukkit.entity.EntityType.SNOWMAN &&
+				event.getNewState().getType() == Material.SNOW) {
+
 				if (!plugin.getConfig().getBoolean("do_snowgolem_snow_trail", true)) {
 					event.setCancelled(true);
 				}
