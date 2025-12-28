@@ -24,16 +24,20 @@ public class GhastListener implements Listener {
 		try {
 			if ((event.getEntity().getType() == EntityType.FIREBALL) && (((Fireball) event.getEntity()).getShooter() instanceof Ghast)) {
 				if(!plugin.getConfig().getBoolean("do_ghast_explode", true)){
+					// Clear blocks and prevent fire, but allow explosion sound/effect
+					event.blockList().clear();
+					event.setYield(0F);
+					// Prevent fire creation
 					Entity fireball = event.getEntity();
-					((Fireball) fireball).setIsIncendiary(false);
-					((Fireball) fireball).setYield(0F);
-					event.setCancelled(true);
+					if (fireball instanceof Fireball) {
+						((Fireball) fireball).setIsIncendiary(false);
+					}
 				}
 				MobGriefControl.LOGGER.debug("" + plugin.get("mobgriefcontrol.entity.ghast.explode") + event.getLocation().getBlockX() + ", " + event.getLocation().getBlockZ());
 				return;
 			}
 		} catch (Exception exception) {
-			plugin.reporter.reportDetailed(plugin, Report.newBuilder(PluginLibrary.ERROR_HANDLING_GHAST_GRIEF).error(exception));
+			MobGriefControl.reporter.reportDetailed(plugin, Report.newBuilder(PluginLibrary.ERROR_HANDLING_GHAST_GRIEF).error(exception));
 		}
 	}
 }
