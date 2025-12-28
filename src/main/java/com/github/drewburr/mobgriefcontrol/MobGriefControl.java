@@ -37,6 +37,17 @@ import com.github.drewburr.mobgriefcontrol.common.PluginLibrary;
 import com.github.drewburr.mobgriefcontrol.listeners.CreeperListener;
 import com.github.drewburr.mobgriefcontrol.listeners.EndermanListener;
 import com.github.drewburr.mobgriefcontrol.listeners.GhastListener;
+import com.github.drewburr.mobgriefcontrol.listeners.WitherListener;
+import com.github.drewburr.mobgriefcontrol.listeners.DragonListener;
+import com.github.drewburr.mobgriefcontrol.listeners.ZombieListener;
+import com.github.drewburr.mobgriefcontrol.listeners.VillagerListener;
+import com.github.drewburr.mobgriefcontrol.listeners.SheepListener;
+import com.github.drewburr.mobgriefcontrol.listeners.RabbitListener;
+import com.github.drewburr.mobgriefcontrol.listeners.FoxListener;
+import com.github.drewburr.mobgriefcontrol.listeners.SnowGolemListener;
+import com.github.drewburr.mobgriefcontrol.listeners.SilverfishListener;
+import com.github.drewburr.mobgriefcontrol.listeners.RavagerListener;
+import com.github.drewburr.mobgriefcontrol.listeners.EndCrystalListener;
 import com.github.drewburr.mobgriefcontrol.common.PluginLogger;
 import com.github.drewburr.mobgriefcontrol.common.error.DetailedErrorReporter;
 import com.github.drewburr.mobgriefcontrol.common.error.Report;
@@ -56,8 +67,8 @@ public class MobGriefControl extends JavaPlugin implements Listener{
 	File langFile;
 	public FileConfiguration lang;
 	YamlConfiguration oldconfig = new YamlConfiguration();
-	String configVersion = "1.0.6";
-	//String langVersion = "1.0.6";
+	String configVersion = "2.0.0";
+	//String langVersion = "2.0.0";
 	String pluginName = THIS_NAME;
 	Translator lang2;
 	public String jarfilename = this.getFile().getAbsoluteFile().toString();
@@ -147,9 +158,21 @@ public class MobGriefControl extends JavaPlugin implements Listener{
 				getConfig().set("debug", oldconfig.get("debug", false));
 				getConfig().set("lang", oldconfig.get("lang", "en_US"));
 				getConfig().set("console.longpluginname", oldconfig.get("console.longpluginname", true));
-				getConfig().set("do_enderman_grief", oldconfig.get("do_enderman_grief", true));
-				getConfig().set("do_creeper_grief", oldconfig.get("do_creeper_grief", true));
-				getConfig().set("do_ghast_grief", oldconfig.get("do_ghast_grief", true));
+				// Migrate old keys to new descriptive names
+				getConfig().set("do_enderman_pickup", oldconfig.get("do_enderman_grief", true));
+				getConfig().set("do_creeper_explode", oldconfig.get("do_creeper_grief", true));
+				getConfig().set("do_ghast_explode", oldconfig.get("do_ghast_grief", true));
+				getConfig().set("do_wither_explode", oldconfig.get("do_wither_grief", true));
+				getConfig().set("do_dragon_destroy", oldconfig.get("do_dragon_grief", true));
+				getConfig().set("do_zombie_break_doors", oldconfig.get("do_zombie_door_break", true));
+				getConfig().set("do_villager_farm", oldconfig.get("do_villager_farming", true));
+				getConfig().set("do_sheep_eat_grass", oldconfig.get("do_sheep_eat_grass", true));
+				getConfig().set("do_rabbit_eat_crops", oldconfig.get("do_rabbit_eat_crops", true));
+				getConfig().set("do_fox_pickup_items", oldconfig.get("do_fox_pickup", true));
+				getConfig().set("do_snowgolem_snow_trail", oldconfig.get("do_snowgolem_trail", true));
+				getConfig().set("do_silverfish_infest_blocks", oldconfig.get("do_silverfish_blocks", true));
+				getConfig().set("do_ravager_destroy_crops", oldconfig.get("do_ravager_grief", true));
+				getConfig().set("do_endcrystal_explode", oldconfig.get("do_endcrystal_grief", true));
 				try {
 					getConfig().save(new File(getDataFolder(), "config.yml"));
 				} catch (Exception exception) {
@@ -173,15 +196,37 @@ getConfig().load(new File(getDataFolder(), "config.yml"));
 			LOGGER.debug("lang=" + getConfig().getString("lang"));
 
 			LOGGER.debug("console.longpluginname=" + getConfig().getBoolean("console.longpluginname"));
-			LOGGER.debug("do_enderman_grief=" + getConfig().getBoolean("do_enderman_grief"));
-			LOGGER.debug("do_creeper_grief=" + getConfig().getBoolean("do_creeper_grief"));
-			LOGGER.debug("do_ghast_grief=" + getConfig().getBoolean("do_ghast_grief"));
+			LOGGER.debug("do_enderman_pickup=" + getConfig().getBoolean("do_enderman_pickup"));
+			LOGGER.debug("do_creeper_explode=" + getConfig().getBoolean("do_creeper_explode"));
+			LOGGER.debug("do_ghast_explode=" + getConfig().getBoolean("do_ghast_explode"));
+			LOGGER.debug("do_wither_explode=" + getConfig().getBoolean("do_wither_explode"));
+			LOGGER.debug("do_dragon_destroy=" + getConfig().getBoolean("do_dragon_destroy"));
+			LOGGER.debug("do_zombie_break_doors=" + getConfig().getBoolean("do_zombie_break_doors"));
+			LOGGER.debug("do_villager_farm=" + getConfig().getBoolean("do_villager_farm"));
+			LOGGER.debug("do_sheep_eat_grass=" + getConfig().getBoolean("do_sheep_eat_grass"));
+			LOGGER.debug("do_rabbit_eat_crops=" + getConfig().getBoolean("do_rabbit_eat_crops"));
+			LOGGER.debug("do_fox_pickup_items=" + getConfig().getBoolean("do_fox_pickup_items"));
+			LOGGER.debug("do_snowgolem_snow_trail=" + getConfig().getBoolean("do_snowgolem_snow_trail"));
+			LOGGER.debug("do_silverfish_infest_blocks=" + getConfig().getBoolean("do_silverfish_infest_blocks"));
+			LOGGER.debug("do_ravager_destroy_crops=" + getConfig().getBoolean("do_ravager_destroy_crops"));
+			LOGGER.debug("do_endcrystal_explode=" + getConfig().getBoolean("do_endcrystal_explode"));
 		}
 
 		// Register mob-specific listeners
 		getServer().getPluginManager().registerEvents(new EndermanListener(this), this);
 		getServer().getPluginManager().registerEvents(new CreeperListener(this), this);
 		getServer().getPluginManager().registerEvents(new GhastListener(this), this);
+		getServer().getPluginManager().registerEvents(new WitherListener(this), this);
+		getServer().getPluginManager().registerEvents(new DragonListener(this), this);
+		getServer().getPluginManager().registerEvents(new ZombieListener(this), this);
+		getServer().getPluginManager().registerEvents(new VillagerListener(this), this);
+		getServer().getPluginManager().registerEvents(new SheepListener(this), this);
+		getServer().getPluginManager().registerEvents(new RabbitListener(this), this);
+		getServer().getPluginManager().registerEvents(new FoxListener(this), this);
+		getServer().getPluginManager().registerEvents(new SnowGolemListener(this), this);
+		getServer().getPluginManager().registerEvents(new SilverfishListener(this), this);
+		getServer().getPluginManager().registerEvents(new RavagerListener(this), this);
+		getServer().getPluginManager().registerEvents(new EndCrystalListener(this), this);
 
 		// Initialize command manager
 		commandManager = new CommandManager();

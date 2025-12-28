@@ -70,6 +70,17 @@ public class PluginLibrary {
 	public static final ReportType ERROR_HANDLING_ENDERMAN_GRIEF = new ReportType("Error handling Enderman Grief.");
 	public static final ReportType ERROR_HANDLING_CREEPER_GRIEF = new ReportType("Error handling Creeper Grief.");
 	public static final ReportType ERROR_HANDLING_GHAST_GRIEF = new ReportType("Error handling Ghast Grief.");
+	public static final ReportType ERROR_HANDLING_WITHER_GRIEF = new ReportType("Error handling Wither Grief.");
+	public static final ReportType ERROR_HANDLING_DRAGON_GRIEF = new ReportType("Error handling Ender Dragon Grief.");
+	public static final ReportType ERROR_HANDLING_ZOMBIE_GRIEF = new ReportType("Error handling Zombie Grief.");
+	public static final ReportType ERROR_HANDLING_VILLAGER_GRIEF = new ReportType("Error handling Villager Grief.");
+	public static final ReportType ERROR_HANDLING_SHEEP_GRIEF = new ReportType("Error handling Sheep Grief.");
+	public static final ReportType ERROR_HANDLING_RABBIT_GRIEF = new ReportType("Error handling Rabbit Grief.");
+	public static final ReportType ERROR_HANDLING_FOX_GRIEF = new ReportType("Error handling Fox Grief.");
+	public static final ReportType ERROR_HANDLING_SNOWGOLEM_GRIEF = new ReportType("Error handling Snow Golem Grief.");
+	public static final ReportType ERROR_HANDLING_SILVERFISH_GRIEF = new ReportType("Error handling Silverfish Grief.");
+	public static final ReportType ERROR_HANDLING_RAVAGER_GRIEF = new ReportType("Error handling Ravager Grief.");
+	public static final ReportType ERROR_HANDLING_ENDCRYSTAL_GRIEF = new ReportType("Error handling End Crystal Grief.");
 
 	/**
 	 * Gets the MoreMobHeads plugin instance.

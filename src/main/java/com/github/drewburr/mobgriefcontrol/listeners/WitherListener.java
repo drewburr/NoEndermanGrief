@@ -9,25 +9,26 @@ import com.github.drewburr.mobgriefcontrol.MobGriefControl;
 import com.github.drewburr.mobgriefcontrol.common.PluginLibrary;
 import com.github.drewburr.mobgriefcontrol.common.error.Report;
 
-public class CreeperListener implements Listener {
+public class WitherListener implements Listener {
 	private final MobGriefControl plugin;
 
-	public CreeperListener(MobGriefControl plugin) {
+	public WitherListener(MobGriefControl plugin) {
 		this.plugin = plugin;
 	}
 
 	@EventHandler
 	public void onEntityExplode(EntityExplodeEvent event) {
 		try {
-			if (event.getEntity().getType() == EntityType.CREEPER) {
-				if(!plugin.getConfig().getBoolean("do_creeper_explode", true)){
+			if (event.getEntity().getType() == EntityType.WITHER ||
+			    event.getEntity().getType() == EntityType.WITHER_SKULL) {
+				if(!plugin.getConfig().getBoolean("do_wither_explode", true)){
 					event.blockList().clear();
 				}
-				MobGriefControl.LOGGER.debug("" + plugin.get("mobgriefcontrol.entity.creeper.explode") + event.getLocation().getBlockX() + ", " + event.getLocation().getBlockZ());
+				MobGriefControl.LOGGER.debug("Wither attempted to explode at " + event.getLocation());
 				return;
 			}
 		} catch (Exception exception) {
-			plugin.reporter.reportDetailed(plugin, Report.newBuilder(PluginLibrary.ERROR_HANDLING_CREEPER_GRIEF).error(exception));
+			plugin.reporter.reportDetailed(plugin, Report.newBuilder(PluginLibrary.ERROR_HANDLING_WITHER_GRIEF).error(exception));
 		}
 	}
 }

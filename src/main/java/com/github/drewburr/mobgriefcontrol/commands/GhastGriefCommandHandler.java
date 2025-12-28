@@ -6,12 +6,12 @@ package com.github.drewburr.mobgriefcontrol.commands;
 public class GhastGriefCommandHandler extends BooleanToggleCommandHandler {
 
 	public GhastGriefCommandHandler() {
-		super("do_ghast_grief", "ghast");
+		super("do_ghast_explode", "ghast");
 	}
 
 	@Override
 	public String getCommandName() {
-		return "ghastgrief";
+		return "do_ghast_explode";
 	}
 
 	@Override

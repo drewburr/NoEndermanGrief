@@ -26,6 +26,17 @@ public class CommandManager {
 		registerHandler(new EndermanGriefCommandHandler());
 		registerHandler(new CreeperGriefCommandHandler());
 		registerHandler(new GhastGriefCommandHandler());
+		registerHandler(new WitherGriefCommandHandler());
+		registerHandler(new DragonGriefCommandHandler());
+		registerHandler(new ZombieDoorBreakCommandHandler());
+		registerHandler(new VillagerFarmingCommandHandler());
+		registerHandler(new SheepEatGrassCommandHandler());
+		registerHandler(new RabbitEatCropsCommandHandler());
+		registerHandler(new FoxPickupCommandHandler());
+		registerHandler(new SnowGolemTrailCommandHandler());
+		registerHandler(new SilverfishBlocksCommandHandler());
+		registerHandler(new RavagerGriefCommandHandler());
+		registerHandler(new EndCrystalGriefCommandHandler());
 	}
 
 	/**

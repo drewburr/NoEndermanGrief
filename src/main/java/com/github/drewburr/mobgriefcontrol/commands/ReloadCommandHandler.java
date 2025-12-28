@@ -31,7 +31,7 @@ public class ReloadCommandHandler implements CommandHandler {
 			MobGriefControl.reporter.reportDetailed(plugin, Report.newBuilder(PluginLibrary.REPORT_CANNOT_CHECK_CONFIG).error(exception));
 		}
 
-		String configVersion = "1.0.6";
+		String configVersion = "2.0.0";
 		String checkconfigversion = oldconfig.getString("version", "1.0.0");
 
 		if (checkconfigversion != null) {
@@ -63,9 +63,21 @@ public class ReloadCommandHandler implements CommandHandler {
 				plugin.getConfig().set("debug", oldconfig.get("debug", false));
 				plugin.getConfig().set("lang", oldconfig.get("lang", "en_US"));
 				plugin.getConfig().set("console.longpluginname", oldconfig.get("console.longpluginname", true));
-				plugin.getConfig().set("do_enderman_grief", oldconfig.get("do_enderman_grief", false));
-				plugin.getConfig().set("do_creeper_grief", oldconfig.get("do_creeper_grief", false));
-				plugin.getConfig().set("do_ghast_grief", oldconfig.get("do_ghast_grief", false));
+				// Migrate old keys to new descriptive names
+				plugin.getConfig().set("do_enderman_pickup", oldconfig.get("do_enderman_grief", true));
+				plugin.getConfig().set("do_creeper_explode", oldconfig.get("do_creeper_grief", true));
+				plugin.getConfig().set("do_ghast_explode", oldconfig.get("do_ghast_grief", true));
+				plugin.getConfig().set("do_wither_explode", oldconfig.get("do_wither_grief", true));
+				plugin.getConfig().set("do_dragon_destroy", oldconfig.get("do_dragon_grief", true));
+				plugin.getConfig().set("do_zombie_break_doors", oldconfig.get("do_zombie_door_break", true));
+				plugin.getConfig().set("do_villager_farm", oldconfig.get("do_villager_farming", true));
+				plugin.getConfig().set("do_sheep_eat_grass", oldconfig.get("do_sheep_eat_grass", true));
+				plugin.getConfig().set("do_rabbit_eat_crops", oldconfig.get("do_rabbit_eat_crops", true));
+				plugin.getConfig().set("do_fox_pickup_items", oldconfig.get("do_fox_pickup", true));
+				plugin.getConfig().set("do_snowgolem_snow_trail", oldconfig.get("do_snowgolem_trail", true));
+				plugin.getConfig().set("do_silverfish_infest_blocks", oldconfig.get("do_silverfish_blocks", true));
+				plugin.getConfig().set("do_ravager_destroy_crops", oldconfig.get("do_ravager_grief", true));
+				plugin.getConfig().set("do_endcrystal_explode", oldconfig.get("do_endcrystal_grief", true));
 
 				try {
 					plugin.getConfig().save(new File(plugin.getDataFolder(), "config.yml"));

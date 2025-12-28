@@ -6,12 +6,12 @@ package com.github.drewburr.mobgriefcontrol.commands;
 public class CreeperGriefCommandHandler extends BooleanToggleCommandHandler {
 
 	public CreeperGriefCommandHandler() {
-		super("do_creeper_grief", "creeper");
+		super("do_creeper_explode", "creeper");
 	}
 
 	@Override
 	public String getCommandName() {
-		return "creepergrief";
+		return "do_creeper_explode";
 	}
 
 	@Override

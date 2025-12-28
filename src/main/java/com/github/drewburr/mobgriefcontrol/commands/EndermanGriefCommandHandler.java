@@ -6,12 +6,12 @@ package com.github.drewburr.mobgriefcontrol.commands;
 public class EndermanGriefCommandHandler extends BooleanToggleCommandHandler {
 
 	public EndermanGriefCommandHandler() {
-		super("do_enderman_grief", "enderman");
+		super("do_enderman_pickup", "enderman");
 	}
 
 	@Override
 	public String getCommandName() {
-		return "endermangrief";
+		return "do_enderman_pickup";
 	}
 
 	@Override

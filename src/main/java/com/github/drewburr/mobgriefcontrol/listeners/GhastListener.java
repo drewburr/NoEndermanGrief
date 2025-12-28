@@ -23,7 +23,7 @@ public class GhastListener implements Listener {
 	public void onEntityExplode(EntityExplodeEvent event) {
 		try {
 			if ((event.getEntity().getType() == EntityType.FIREBALL) && (((Fireball) event.getEntity()).getShooter() instanceof Ghast)) {
-				if(!plugin.getConfig().getBoolean("do_ghast_grief", true)){
+				if(!plugin.getConfig().getBoolean("do_ghast_explode", true)){
 					Entity fireball = event.getEntity();
 					((Fireball) fireball).setIsIncendiary(false);
 					((Fireball) fireball).setYield(0F);
