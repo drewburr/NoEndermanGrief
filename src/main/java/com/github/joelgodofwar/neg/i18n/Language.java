@@ -15,7 +15,7 @@ public class Language {
 	}
 
 	public static String get(String key) {
-		return ResourceBundle.getBundle("lang/messages", new Locale(lang)).getString(key);
+		return ResourceBundle.getBundle("lang/messages", Locale.forLanguageTag(lang.replace("_", "-"))).getString(key);
 	}
 
 }

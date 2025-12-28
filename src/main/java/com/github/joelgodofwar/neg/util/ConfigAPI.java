@@ -5,11 +5,11 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.PluginDescriptionFile;
 
 import com.github.joelgodofwar.neg.NoEndermanGrief;
 
@@ -18,7 +18,6 @@ public class ConfigAPI  {
 	@SuppressWarnings("unused")
 	public static  void CheckForConfig(Plugin plugin){
 		try{
-			PluginDescriptionFile pdfFile = plugin.getDescription();
 			if(!plugin.getDataFolder().exists()){
 				log(": Data Folder doesn't exist", plugin);
 				log(": Creating Data Folder", plugin);
@@ -75,14 +74,15 @@ public class ConfigAPI  {
 		String daString7 = config.getString("lang", "en_US").replace("'", "");
 		NoEndermanGrief.daLang = daString7;
 		if(sender != null){
-			sender.sendMessage(ChatColor.YELLOW + plugin.getName() + ChatColor.WHITE + " Configs Reloaded");
+			sender.sendMessage(Component.text(plugin.getName(), NamedTextColor.YELLOW)
+				.append(Component.text(" Configs Reloaded", NamedTextColor.WHITE)));
 		}
 	}
 	public static  void log(String dalog, Plugin plugin){
 		NoEndermanGrief.LOGGER.log(plugin.getName() + " " + dalog);
 	}
 	public  void logDebug(String dalog, Plugin plugin){
-		log(" " + plugin.getDescription().getVersion() + " [DEBUG] " + dalog, plugin);
+		log(" " + plugin.getPluginMeta().getVersion() + " [DEBUG] " + dalog, plugin);
 	}
 	/*
      * this copy(); method copies the specified file from your jar

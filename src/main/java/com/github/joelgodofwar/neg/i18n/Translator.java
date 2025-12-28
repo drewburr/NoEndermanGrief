@@ -30,7 +30,7 @@ public class Translator {
 
 	public String get(String lang, String key, String... defaultValue) {
 		String value = Arrays.stream(defaultValue).findFirst().orElse(null);
-		ResourceBundle bundle = ResourceBundle.getBundle("lang/lang", new Locale(lang));
+		ResourceBundle bundle = ResourceBundle.getBundle("lang/lang", Locale.forLanguageTag(lang.replace("_", "-")));
 		try {
 			value = bundle.getString(key);
 		} catch (MissingResourceException e) {

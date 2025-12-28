@@ -12,9 +12,10 @@ import java.util.jar.JarFile;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.yaml.snakeyaml.Yaml;
+
+import io.papermc.paper.plugin.configuration.PluginMeta;
 
 public class PluginUtils {
 
@@ -22,7 +23,7 @@ public class PluginUtils {
         Map<String, Object> info = new LinkedHashMap<>();
 
         // Get plugin information
-        PluginDescriptionFile description = plugin.getDescription();
+        PluginMeta description = plugin.getPluginMeta();
         File file = null;
         try {
             Method getFileMethod = JavaPlugin.class.getDeclaredMethod("getFile");
@@ -49,7 +50,7 @@ public class PluginUtils {
         // info.put("FileName", "" + getJarNameByPluginName(description.getName()));
 
         // Main class
-        info.put("Main", description.getMain());
+        info.put("Main", description.getMainClass());
 
         // Enabled and API version
         info.put("Enabled", plugin.isEnabled());
@@ -61,27 +62,17 @@ public class PluginUtils {
         info.put("Website", description.getWebsite());
 
         // Dependencies
-        info.put("Depends", description.getDepend());
-        info.put("SoftDepends", description.getSoftDepend());
+        info.put("Depends", description.getPluginDependencies());
+        info.put("SoftDepends", description.getPluginSoftDependencies());
 
         // Commands and permissions
         Map<String, Object> commands = new LinkedHashMap<>();
-        Map<String, Map<String, Object>> pluginCommands = plugin.getDescription().getCommands();
-        for (Map.Entry<String, Map<String, Object>> entry : pluginCommands.entrySet()) {
-            Map<String, Object> commandInfo = new LinkedHashMap<>();
-            commandInfo.put("description", entry.getValue().get("description"));
-            commandInfo.put("usage", entry.getValue().get("usage"));
-            commandInfo.put("permission", entry.getValue().get("permission"));
-            commandInfo.put("permission message", entry.getValue().get("permission message"));
-            commandInfo.put("aliases", entry.getValue().get("aliases"));
-            commands.put(entry.getKey(), commandInfo);
-        }
+        // Note: PluginMeta doesn't provide command information via API
+        // Commands would need to be read from plugin.yml directly if needed
         info.put("Commands", commands);
 
         // Load order and provides
-        info.put("Load", description.getLoad());
-        info.put("LoadBefore", description.getLoadBefore());
-        info.put("Provides", description.getProvides());
+        info.put("Provides", description.getProvidedPlugins());
 
         return info;
     }

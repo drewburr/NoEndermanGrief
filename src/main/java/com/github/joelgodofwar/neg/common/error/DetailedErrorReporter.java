@@ -368,7 +368,7 @@ public class DetailedErrorReporter implements ErrorReporter {
 
 		// And plugin
 		if (plugin != null) {
-			writer.println("Version: " + neg.getName() + " v" + neg.getDescription().getVersion());
+			writer.println("Version: " + neg.getName() + " v" + neg.getPluginMeta().getVersion());
 			String jarfilename = neg.getjarfilename();
 			int lastSeparator = jarfilename.lastIndexOf(File.separatorChar);
 			String filename = lastSeparator >= 0 ? jarfilename.substring(lastSeparator + 1) : jarfilename;
@@ -405,8 +405,9 @@ public class DetailedErrorReporter implements ErrorReporter {
 			// Inform of this occurrence
 			if (isChatWarnings()) {
 				Bukkit.getServer().broadcast(
-						String.format("Error %s (%s) occurred in %s.", report.getReportMessage(), report.getException(),
-								sender),
+						net.kyori.adventure.text.Component.text(
+								String.format("Error %s (%s) occurred in %s.", report.getReportMessage(), report.getException(),
+										sender)),
 						ERROR_PERMISSION);
 			}
 		}
@@ -681,11 +682,11 @@ public class DetailedErrorReporter implements ErrorReporter {
 				pluginList.append(", ");
 			}
 
-			pluginList.append(plugin.getDescription().getName());
-			if (plugin.getDescription().getProvides().size() > 0) {
-				pluginList.append(" (").append(String.join(", ", plugin.getDescription().getProvides())).append(")");
+			pluginList.append(plugin.getName());
+			if (plugin.getPluginMeta().getProvidedPlugins().size() > 0) {
+				pluginList.append(" (").append(String.join(", ", plugin.getPluginMeta().getProvidedPlugins())).append(")");
 			}
-			pluginList.append(" [" + plugin.getDescription().getVersion() + "]");
+			pluginList.append(" [" + plugin.getPluginMeta().getVersion() + "]");
 		}
 
 		return "Plugins (" + plugins.length + "): " + pluginList.toString();

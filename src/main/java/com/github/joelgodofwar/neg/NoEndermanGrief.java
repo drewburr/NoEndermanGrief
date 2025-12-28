@@ -30,6 +30,9 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
+
 import com.github.joelgodofwar.neg.common.PluginLibrary;
 import com.github.joelgodofwar.neg.listeners.CreeperListener;
 import com.github.joelgodofwar.neg.listeners.EndermanListener;
@@ -69,8 +72,8 @@ public class NoEndermanGrief extends JavaPlugin implements Listener{
 		debug = getConfig().getBoolean("debug", false);
 		daLang = getConfig().getString("lang", "en_US");
 		lang2 = new Translator(daLang, getDataFolder().toString());
-		THIS_NAME = this.getDescription().getName();
-		THIS_VERSION = this.getDescription().getVersion();
+		THIS_NAME = this.getPluginMeta().getName();
+		THIS_VERSION = this.getPluginMeta().getVersion();
 		if(!getConfig().getBoolean("console.longpluginname", true)) {
 			pluginName = "NEG";
 		}else {
@@ -316,9 +319,7 @@ public class NoEndermanGrief extends JavaPlugin implements Listener{
 					}
 					if( (sender instanceof Player) && sender.hasPermission("noendermangrief.admin") ){
 						Player player = (Player) sender;
-						Inventory gui = Bukkit.createInventory(player, 6*9, "Configurations");
-
-						//Menu Options(Items)
+					Inventory gui = Bukkit.createInventory(player, 6*9, Component.text("Configurations"));
 						ItemStack btnSpace = new ItemStack(Material.AIR);
 						ItemStack btnUpdate = new ItemStack(Material.WRITABLE_BOOK);
 						//ItemStack btnUpdateTrue = new ItemStack(Material.LIME_STAINED_GLASS_PANE);
@@ -378,366 +379,324 @@ public class NoEndermanGrief extends JavaPlugin implements Listener{
 
 						//Edit the items
 						ItemMeta update_meta = btnUpdate.getItemMeta();
-						update_meta.setDisplayName("auto_update_check");
-						ArrayList<String> update_lore = new ArrayList<>();
-						update_lore.add("Should this plugin ");
-						update_lore.add("automatically" + " check");
-						update_lore.add(" for updates?");
-						update_meta.setLore(update_lore);
-						btnUpdate.setItemMeta(update_meta);
+					update_meta.displayName(Component.text("auto_update_check"));
+					update_meta.lore(List.of(
+						Component.text("Should this plugin "),
+						Component.text("automatically check"),
+						Component.text(" for updates?")
+					));
+					btnUpdate.setItemMeta(update_meta);
 
-						ItemMeta updatetrue_meta = btnUpdateTrue.getItemMeta();
-						updatetrue_meta.setDisplayName("Set auto_update_check to True");
-						ArrayList<String> updatetrue_lore = new ArrayList<>();
-						updatetrue_lore.add("Will check for updates.");
-						updatetrue_meta.setLore(updatetrue_lore);
-						btnUpdateTrue.setItemMeta(updatetrue_meta);
+					ItemMeta updatetrue_meta = btnUpdateTrue.getItemMeta();
+					updatetrue_meta.displayName(Component.text("Set auto_update_check to True"));
+					updatetrue_meta.lore(List.of(
+						Component.text("Will check for updates.")
+					));
+					btnUpdateTrue.setItemMeta(updatetrue_meta);
 
-						ItemMeta updatefalse_meta = btnUpdateTrue.getItemMeta();
-						updatefalse_meta.setDisplayName("Set auto_update_check to False");
-						ArrayList<String> updatefalse_lore = new ArrayList<>();
-						updatefalse_lore.add("Will not check for updates.");
-						updatefalse_meta.setLore(updatefalse_lore);
-						btnUpdateFalse.setItemMeta(updatefalse_meta);
-
+					ItemMeta updatefalse_meta = btnUpdateTrue.getItemMeta();
+					updatefalse_meta.displayName(Component.text("Set auto_update_check to False"));
+					updatefalse_meta.lore(List.of(
+						Component.text("Will not check for updates.")
+					));
 
 
 						ItemMeta lang_meta = btnLang.getItemMeta();
-						lang_meta.setDisplayName("language");
-						ArrayList<String> lang_lore = new ArrayList<>();
-						lang_lore.add("Select your preferred language");
-						lang_meta.setLore(lang_lore);
-						btnLang.setItemMeta(lang_meta);
+					lang_meta.displayName(Component.text("language"));
+					lang_meta.lore(List.of(
+						Component.text("Select your preferred language")
+					));
+					btnLang.setItemMeta(lang_meta);
 
-						ItemMeta langCZ_meta = btnLangCZ.getItemMeta();
-						langCZ_meta.setDisplayName("čeština (cs-CZ)");
-						ArrayList<String> langCZ_lore = new ArrayList<>();
-						langCZ_lore.add("Jako jazyk vyberte češtinu.");
-						langCZ_meta.setLore(langCZ_lore);
-						btnLangCZ.setItemMeta(langCZ_meta);
+					ItemMeta langCZ_meta = btnLangCZ.getItemMeta();
+					langCZ_meta.displayName(Component.text("čeština (cs-CZ)"));
+					langCZ_meta.lore(List.of(
+						Component.text("Jako jazyk vyberte češtinu.")
+					));
+					btnLangCZ.setItemMeta(langCZ_meta);
 
-						ItemMeta langDE_meta = btnLangDE.getItemMeta();
-						langDE_meta.setDisplayName("Deutsche (de_DE)");
-						ArrayList<String> langDE_lore = new ArrayList<>();
-						langDE_lore.add("Wählen Sie Deutsch als Sprache aus.");
-						langDE_meta.setLore(langDE_lore);
-						btnLangDE.setItemMeta(langDE_meta);
+					ItemMeta langDE_meta = btnLangDE.getItemMeta();
+					langDE_meta.displayName(Component.text("Deutsche (de_DE)"));
+					langDE_meta.lore(List.of(
+						Component.text("Wählen Sie Deutsch als Sprache aus.")
+					));
+					btnLangDE.setItemMeta(langDE_meta);
 
-						ItemMeta langEN_meta = btnLangEN.getItemMeta();
-						langEN_meta.setDisplayName("English (en_US)");
-						ArrayList<String> langEN_lore = new ArrayList<>();
-						langEN_lore.add("Select English as your language.");
-						langEN_meta.setLore(langEN_lore);
-						btnLangEN.setItemMeta(langEN_meta);
+					ItemMeta langEN_meta = btnLangEN.getItemMeta();
+					langEN_meta.displayName(Component.text("English (en_US)"));
+					langEN_meta.lore(List.of(
+						Component.text("Select English as your language.")
+					));
+					btnLangEN.setItemMeta(langEN_meta);
 
-						ItemMeta langFR_meta = btnLangFR.getItemMeta();
-						langFR_meta.setDisplayName("Français (fr_FR)");
-						ArrayList<String> langFR_lore = new ArrayList<>();
-						langFR_lore.add("Sélectionnez Français comme langue.");
-						langFR_meta.setLore(langFR_lore);
-						btnLangFR.setItemMeta(langFR_meta);
+					ItemMeta langFR_meta = btnLangFR.getItemMeta();
+					langFR_meta.displayName(Component.text("Français (fr_FR)"));
+					langFR_meta.lore(List.of(
+						Component.text("Sélectionnez Français comme langue.")
+					));
+					btnLangFR.setItemMeta(langFR_meta);
 
-						ItemMeta langLOL_meta = btnLangLOL.getItemMeta();
-						langLOL_meta.setDisplayName("LoL Cat (lol_US)");
-						ArrayList<String> langLOL_lore = new ArrayList<>();
-						langLOL_lore.add("Select lulz kat az ur language.");
-						langLOL_meta.setLore(langLOL_lore);
-						btnLangLOL.setItemMeta(langLOL_meta);
+					ItemMeta langLOL_meta = btnLangLOL.getItemMeta();
+					langLOL_meta.displayName(Component.text("LoL Cat (lol_US)"));
+					langLOL_meta.lore(List.of(
+						Component.text("Select lulz kat az ur language.")
+					));
+					btnLangLOL.setItemMeta(langLOL_meta);
 
-						ItemMeta langNL_meta = btnLangNL.getItemMeta();
-						langNL_meta.setDisplayName("Nederlands (nl_NL)");
-						ArrayList<String> langNL_lore = new ArrayList<>();
-						langNL_lore.add("Selecteer Nederlands als je taal.");
-						langNL_meta.setLore(langNL_lore);
-						btnLangNL.setItemMeta(langNL_meta);
+					ItemMeta langNL_meta = btnLangNL.getItemMeta();
+					langNL_meta.displayName(Component.text("Nederlands (nl_NL)"));
+					langNL_meta.lore(List.of(
+						Component.text("Selecteer Nederlands als je taal.")
+					));
+					btnLangNL.setItemMeta(langNL_meta);
 
-						ItemMeta langBR_meta = btnLangBR.getItemMeta();
-						langBR_meta.setDisplayName("Português (pt_BR)");
-						ArrayList<String> langBR_lore = new ArrayList<>();
-						langBR_lore.add("Selecione Português como seu idioma.");
-						langBR_meta.setLore(langBR_lore);
-						btnLangBR.setItemMeta(langBR_meta);
+					ItemMeta langBR_meta = btnLangBR.getItemMeta();
+					langBR_meta.displayName(Component.text("Português (pt_BR)"));
+					langBR_meta.lore(List.of(
+						Component.text("Selecione Português como seu idioma.")
+					));
 
 
 
 						ItemMeta debug_meta = btnDebug.getItemMeta();
-						debug_meta.setDisplayName("debug");
-						ArrayList<String> debug_lore = new ArrayList<>();
-						debug_lore.add("Set to true before.");
-						debug_lore.add("sending a log about");
-						debug_lore.add("an issue.");
-						debug_lore.add(" ");
-						debug_lore.add(""  + "Logs trace data");
-						debug_lore.add(""   + "required to pinpoint");
-						debug_lore.add(""  + "where errors are.");
-						debug_meta.setLore(debug_lore);
-						btnDebug.setItemMeta(debug_meta);
+					debug_meta.displayName(Component.text("debug"));
+					debug_meta.lore(List.of(
+						Component.text("Set to true before."),
+						Component.text("sending a log about"),
+						Component.text("an issue."),
+						Component.text(" "),
+						Component.text("Logs trace data"),
+						Component.text("required to pinpoint"),
+						Component.text("where errors are.")
+					));
+					btnDebug.setItemMeta(debug_meta);
 
-						ItemMeta debugtrue_meta = btnUpdateTrue.getItemMeta();
-						debugtrue_meta.setDisplayName("Set debug to True");
-						ArrayList<String> debugtrue_lore = new ArrayList<>();
-						//debugtrue_lore.add("Set debug to True");
-						debugtrue_lore.add("Will log debug information.");
-						debugtrue_meta.setLore(debugtrue_lore);
-						btnDebugTrue.setItemMeta(debugtrue_meta);
+					ItemMeta debugtrue_meta = btnUpdateTrue.getItemMeta();
+					debugtrue_meta.displayName(Component.text("Set debug to True"));
+					debugtrue_meta.lore(List.of(
+						Component.text("Will log debug information.")
+					));
+					btnDebugTrue.setItemMeta(debugtrue_meta);
 
-						ItemMeta debugfalse_meta = btnUpdateTrue.getItemMeta();
-						debugfalse_meta.setDisplayName("Set debug to False");
-						ArrayList<String> debugfalse_lore = new ArrayList<>();
-						//debugfalse_lore.add("Set debug to False");
-						debugfalse_lore.add("Will not log debug information.");
-						debugfalse_meta.setLore(debugfalse_lore);
-						btnDebugFalse.setItemMeta(debugfalse_meta);
+					ItemMeta debugfalse_meta = btnUpdateTrue.getItemMeta();
+					debugfalse_meta.displayName(Component.text("Set debug to False"));
+					debugfalse_meta.lore(List.of(
+						Component.text("Will not log debug information.")
+					));
+					btnDebugFalse.setItemMeta(debugfalse_meta);
 
+					ItemMeta longname_meta = btnLongname.getItemMeta();
+					longname_meta.displayName(Component.text("console.longpluginname"));
+					longname_meta.lore(List.of(
+						Component.text("Logs use NoEndermanGrief"),
+						Component.text("or NEG.")
+					));
+					btnLongname.setItemMeta(longname_meta);
 
+					ItemMeta longnametrue_meta = btnLongnameTrue.getItemMeta();
+					longnametrue_meta.displayName(Component.text("Set longname.colorful_longname to True"));
+					longnametrue_meta.lore(List.of(
+						Component.text("Will have colorful text in longname.")
+					));
+					btnLongnameTrue.setItemMeta(longnametrue_meta);
 
+					ItemMeta longnamefalse_meta = btnLongnameFalse.getItemMeta();
+					longnamefalse_meta.displayName(Component.text("Set longname.colorful_longname to False"));
+					longnamefalse_meta.lore(List.of(
+						Component.text("Will not have colorful text in longname.")
+					));
+					btnLongnameFalse.setItemMeta(longnamefalse_meta);
 
+					ItemMeta trader_meta = btnTrader.getItemMeta();
+					trader_meta.displayName(Component.text("wandering_trader_spawn"));
+					trader_meta.lore(List.of(
+						Component.text("Set if Wandering"),
+						Component.text("Traders should spawn."),
+						Component.text(" "),
+						Component.text("false = no spawn")
+					));
+					btnTrader.setItemMeta(trader_meta);
 
+					ItemMeta tradertrue_meta = btnTraderTrue.getItemMeta();
+					tradertrue_meta.displayName(Component.text("Set wandering_trader_spawn to True"));
+					tradertrue_meta.lore(List.of(
+						Component.text("Wandering Traders will spawn.")
+					));
+					btnTraderTrue.setItemMeta(tradertrue_meta);
 
+					ItemMeta traderfalse_meta = btnTraderFalse.getItemMeta();
+					traderfalse_meta.displayName(Component.text("Set wandering_trader_spawn to False"));
+					traderfalse_meta.lore(List.of(
+						Component.text("Wandering Traders will NOT spawn.")
+					));
+					btnTraderFalse.setItemMeta(traderfalse_meta);
 
-						ItemMeta longname_meta = btnLongname.getItemMeta();
-						longname_meta.setDisplayName("console.longpluginname");
-						ArrayList<String> longname_lore = new ArrayList<>();
-						longname_lore.add("Logs use NoEndermanGrief");
-						longname_lore.add("or NEG.");
-						longname_meta.setLore(longname_lore);
-						btnLongname.setItemMeta(longname_meta);
+					ItemMeta pillager_meta = btnPillager.getItemMeta();
+					pillager_meta.displayName(Component.text("pillager_patrol_spawn"));
+					pillager_meta.lore(List.of(
+						Component.text("Set if Pillager"),
+						Component.text("Patrols should spawn."),
+						Component.text(" "),
+						Component.text("false = no spawn")
+					));
+					btnPillager.setItemMeta(pillager_meta);
 
-						ItemMeta longnametrue_meta = btnLongnameTrue.getItemMeta();
-						longnametrue_meta.setDisplayName("Set longname.colorful_longname to True");
-						ArrayList<String> longnametrue_lore = new ArrayList<>();
-						longnametrue_lore.add("Will have colorful text in longname.");
-						longnametrue_meta.setLore(longnametrue_lore);
-						btnLongnameTrue.setItemMeta(longnametrue_meta);
+					ItemMeta pillagertrue_meta = btnPillagerTrue.getItemMeta();
+					pillagertrue_meta.displayName(Component.text("Set pillager_patrol_spawn to True"));
+					pillagertrue_meta.lore(List.of(
+						Component.text("Pillagers will spawn.")
+					));
+					btnPillagerTrue.setItemMeta(pillagertrue_meta);
 
-						ItemMeta longnamefalse_meta = btnLongnameFalse.getItemMeta();
-						longnamefalse_meta.setDisplayName("Set longname.colorful_longname to False");
-						ArrayList<String> longnamefalse_lore = new ArrayList<>();
-						longnamefalse_lore.add("Will not have colorful text in longname.");
-						longnamefalse_meta.setLore(longnamefalse_lore);
-						btnLongnameFalse.setItemMeta(longnamefalse_meta);
+					ItemMeta pillagerfalse_meta = btnPillagerFalse.getItemMeta();
+					pillagerfalse_meta.displayName(Component.text("Set pillager_patrol_spawn to False"));
+					pillagerfalse_meta.lore(List.of(
+						Component.text("Pillagers will NOT spawn.")
+					));
+					btnPillagerFalse.setItemMeta(pillagerfalse_meta);
 
+					ItemMeta ender_meta = btnEnder.getItemMeta();
+					ender_meta.displayName(Component.text("enderman_grief"));
+					ender_meta.lore(List.of(
+						Component.text("Set if Endermen can"),
+						Component.text("pick up blocks."),
+						Component.text(" "),
+						Component.text("false = no pickup")
+					));
+					btnEnder.setItemMeta(ender_meta);
 
-						ItemMeta trader_meta = btnTrader.getItemMeta();
-						trader_meta.setDisplayName("wandering_trader_spawn");
-						ArrayList<String> trader_lore = new ArrayList<>();
-						trader_lore.add("Set if Wandering");
-						trader_lore.add("Traders should spawn.");
-						trader_lore.add(" ");
-						trader_lore.add(""  + "false = no spawn");
-						trader_meta.setLore(trader_lore);
-						btnTrader.setItemMeta(trader_meta);
+					ItemMeta endertrue_meta = btnEnderTrue.getItemMeta();
+					endertrue_meta.displayName(Component.text("Set enderman_grief to True"));
+					endertrue_meta.lore(List.of(
+						Component.text("Endermen will pickup blocks.")
+					));
+					btnEnderTrue.setItemMeta(endertrue_meta);
 
-						ItemMeta tradertrue_meta = btnTraderTrue.getItemMeta();
-						tradertrue_meta.setDisplayName("Set wandering_trader_spawn to True");
-						ArrayList<String> tradertrue_lore = new ArrayList<>();
-						//tradertrue_lore.add("Set wandering_trader_spawn to True");
-						tradertrue_lore.add("Wandering Traders will spawn.");
-						tradertrue_meta.setLore(tradertrue_lore);
-						btnTraderTrue.setItemMeta(tradertrue_meta);
+					ItemMeta enderfalse_meta = btnEnderFalse.getItemMeta();
+					enderfalse_meta.displayName(Component.text("Set enderman_grief to False"));
+					enderfalse_meta.lore(List.of(
+						Component.text("Endermen will NOT pickup blocks.")
+					));
+					btnEnderFalse.setItemMeta(enderfalse_meta);
 
-						ItemMeta traderfalse_meta = btnTraderFalse.getItemMeta();
-						traderfalse_meta.setDisplayName("Set wandering_trader_spawn to False");
-						ArrayList<String> traderfalse_lore = new ArrayList<>();
-						//traderfalse_lore.add("Set wandering_trader_spawn to False");
-						traderfalse_lore.add("Wandering Traders will NOT spawn.");
-						traderfalse_meta.setLore(traderfalse_lore);
-						btnTraderFalse.setItemMeta(traderfalse_meta);
+					ItemMeta ghast_meta = btnGhast.getItemMeta();
+					ghast_meta.displayName(Component.text("ghast_grief"));
+					ghast_meta.lore(List.of(
+						Component.text("Set whether Ghast"),
+						Component.text("fireball explosions"),
+						Component.text("can destroy blocks."),
+						Component.text(" "),
+						Component.text("false = no grief")
+					));
+					btnGhast.setItemMeta(ghast_meta);
 
+					ItemMeta ghasttrue_meta = btnGhastTrue.getItemMeta();
+					ghasttrue_meta.displayName(Component.text("Set ghast_grief to True"));
+					ghasttrue_meta.lore(List.of(
+						Component.text("Ghast fireballs will destroy blocks.")
+					));
+					btnGhastTrue.setItemMeta(ghasttrue_meta);
 
+					ItemMeta ghastfalse_meta = btnGhastFalse.getItemMeta();
+					ghastfalse_meta.displayName(Component.text("Set ghast_grief to False"));
+					ghastfalse_meta.lore(List.of(
+						Component.text("Ghast fireballs will NOT"),
+						Component.text("destroy blocks.")
+					));
+					btnGhastFalse.setItemMeta(ghastfalse_meta);
 
-						ItemMeta pillager_meta = btnPillager.getItemMeta();
-						pillager_meta.setDisplayName("pillager_patrol_spawn");
-						ArrayList<String> pillager_lore = new ArrayList<>();
-						pillager_lore.add("Set if Pillager");
-						pillager_lore.add("Patrols should spawn.");
-						pillager_lore.add(" ");
-						pillager_lore.add(""  + "false = no spawn");
-						pillager_meta.setLore(pillager_lore);
-						btnPillager.setItemMeta(pillager_meta);
+					ItemMeta horse_meta = btnHorse.getItemMeta();
+					horse_meta.displayName(Component.text("skeleton_horse_spawn"));
+					horse_meta.lore(List.of(
+						Component.text("Set whether Ghast"),
+						Component.text("fireball explosions"),
+						Component.text("can destroy blocks."),
+						Component.text(" "),
+						Component.text("false = no grief")
+					));
+					btnHorse.setItemMeta(horse_meta);
 
-						ItemMeta pillagertrue_meta = btnPillagerTrue.getItemMeta();
-						pillagertrue_meta.setDisplayName("Set pillager_patrol_spawn to True");
-						ArrayList<String> pillagertrue_lore = new ArrayList<>();
-						//pillagertrue_lore.add("Set pillager_patrol_spawn to True");
-						pillagertrue_lore.add("Pillagers will spawn.");
-						pillagertrue_meta.setLore(pillagertrue_lore);
-						btnPillagerTrue.setItemMeta(pillagertrue_meta);
+					ItemMeta horsetrue_meta = btnHorseTrue.getItemMeta();
+					horsetrue_meta.displayName(Component.text("Set skeleton_horse_spawn to True"));
+					horsetrue_meta.lore(List.of(
+						Component.text("Skeleton Horses will spawn.")
+					));
+					btnHorseTrue.setItemMeta(horsetrue_meta);
 
-						ItemMeta pillagerfalse_meta = btnPillagerFalse.getItemMeta();
-						pillagerfalse_meta.setDisplayName("Set pillager_patrol_spawn to False");
-						ArrayList<String> pillagerfalse_lore = new ArrayList<>();
-						//pillagerfalse_lore.add("Set pillager_patrol_spawn to False");
-						pillagerfalse_lore.add("Pillagers will NOT spawn.");
-						pillagerfalse_meta.setLore(pillagerfalse_lore);
-						btnPillagerFalse.setItemMeta(pillagerfalse_meta);
+					ItemMeta horsefalse_meta = btnHorseFalse.getItemMeta();
+					horsefalse_meta.displayName(Component.text("Set skeleton_horse_spawn to False"));
+					horsefalse_meta.lore(List.of(
+						Component.text("Skeleton Horses will NOT spawn.")
+					));
+					btnHorseFalse.setItemMeta(horsefalse_meta);
 
+					ItemMeta phantom_meta = btnPhantom.getItemMeta();
+					phantom_meta.displayName(Component.text("phantom_spawn"));
+					phantom_meta.lore(List.of(
+						Component.text("Set whether Ghast"),
+						Component.text("fireball explosions"),
+						Component.text("can destroy blocks."),
+						Component.text(" "),
+						Component.text("false = no grief")
+					));
+					btnPhantom.setItemMeta(phantom_meta);
 
+					ItemMeta phantomtrue_meta = btnPhantomTrue.getItemMeta();
+					phantomtrue_meta.displayName(Component.text("Set phantom_spawn to True"));
+					phantomtrue_meta.lore(List.of(
+						Component.text("Phantoms will spawn.")
+					));
+					btnPhantomTrue.setItemMeta(phantomtrue_meta);
 
-						ItemMeta ender_meta = btnEnder.getItemMeta();
-						ender_meta.setDisplayName("enderman_grief");
-						ArrayList<String> ender_lore = new ArrayList<>();
-						ender_lore.add("Set if Endermen can");
-						ender_lore.add("pick up blocks.");
-						ender_lore.add(" ");
-						ender_lore.add(""  + "false = no pickup");
-						ender_meta.setLore(ender_lore);
-						btnEnder.setItemMeta(ender_meta);
+					ItemMeta phantomfalse_meta = btnPhantomFalse.getItemMeta();
+					phantomfalse_meta.displayName(Component.text("Set phantom_spawn to False"));
+					phantomfalse_meta.lore(List.of(
+						Component.text("Phantoms will NOT spawn.")
+					));
+					btnPhantomFalse.setItemMeta(phantomfalse_meta);
 
-						ItemMeta endertrue_meta = btnEnderTrue.getItemMeta();
-						endertrue_meta.setDisplayName("Set enderman_grief to True");
-						ArrayList<String> endertrue_lore = new ArrayList<>();
-						//endertrue_lore.add("Set enderman_grief to True");
-						endertrue_lore.add("Endermen will pickup blocks.");
-						endertrue_meta.setLore(endertrue_lore);
-						btnEnderTrue.setItemMeta(endertrue_meta);
+					ItemMeta creeper_meta = btnCreeper.getItemMeta();
+					creeper_meta.displayName(Component.text("creeper_grief"));
+					creeper_meta.lore(List.of(
+						Component.text("Set if Creeper"),
+						Component.text("explosions can"),
+						Component.text("destroy blocks."),
+						Component.text(" "),
+						Component.text("false = no grief")
+					));
+					btnCreeper.setItemMeta(creeper_meta);
 
-						ItemMeta enderfalse_meta = btnEnderFalse.getItemMeta();
-						enderfalse_meta.setDisplayName("Set enderman_grief to False");
-						ArrayList<String> enderfalse_lore = new ArrayList<>();
-						//enderfalse_lore.add("Set enderman_grief to False");
-						enderfalse_lore.add("Endermen will NOT pickup blocks.");
-						enderfalse_meta.setLore(enderfalse_lore);
-						btnEnderFalse.setItemMeta(enderfalse_meta);
+					ItemMeta creepertrue_meta = btnCreeperTrue.getItemMeta();
+					creepertrue_meta.displayName(Component.text("Set creeper_grief to True"));
+					creepertrue_meta.lore(List.of(
+						Component.text("Creeper Explosions will destroy blocks.")
+					));
+					btnCreeperTrue.setItemMeta(creepertrue_meta);
 
+					ItemMeta creeperfalse_meta = btnCreeperFalse.getItemMeta();
+					creeperfalse_meta.displayName(Component.text("Set creeper_grief to False"));
+					creeperfalse_meta.lore(List.of(
+						Component.text("Creeper Explosions will NOT destroy blocks.")
+					));
+					btnCreeperFalse.setItemMeta(creeperfalse_meta);
 
+					ItemMeta save_meta = btnSave.getItemMeta();
+					save_meta.displayName(Component.text("Set configs and save."));
+					save_meta.lore(List.of(
+						Component.text("Your current changes"),
+						Component.text("will be set and saved"),
+						Component.text("to getConfig().yml")
+					));
+					btnSave.setItemMeta(save_meta);
 
-						ItemMeta ghast_meta = btnGhast.getItemMeta();
-						ghast_meta.setDisplayName("ghast_grief");
-						ArrayList<String> ghast_lore = new ArrayList<>();
-						ghast_lore.add("Set whether Ghast");
-						ghast_lore.add("fireball explosions");
-						ghast_lore.add("can destroy blocks.");
-						ghast_lore.add(" ");
-						ghast_lore.add(""  + "false = no grief");
-						ghast_meta.setLore(ghast_lore);
-						btnGhast.setItemMeta(ghast_meta);
-
-						ItemMeta ghasttrue_meta = btnGhastTrue.getItemMeta();
-						ghasttrue_meta.setDisplayName("Set ghast_grief to True");
-						ArrayList<String> ghasttrue_lore = new ArrayList<>();
-						//ghasttrue_lore.add("Set ghast_grief to True");
-						ghasttrue_lore.add("Ghast fireballs will destroy blocks.");
-						ghasttrue_meta.setLore(ghasttrue_lore);
-						btnGhastTrue.setItemMeta(ghasttrue_meta);
-
-						ItemMeta ghastfalse_meta = btnGhastFalse.getItemMeta();
-						ghastfalse_meta.setDisplayName("Set ghast_grief to False");
-						ArrayList<String> ghastfalse_lore = new ArrayList<>();
-						//ghastfalse_lore.add("Set ghast_grief to False");
-						ghastfalse_lore.add("Ghast fireballs will NOT");
-						ghastfalse_lore.add("destroy blocks.");
-						ghastfalse_meta.setLore(ghastfalse_lore);
-						btnGhastFalse.setItemMeta(ghastfalse_meta);
-
-
-
-						ItemMeta horse_meta = btnHorse.getItemMeta();
-						horse_meta.setDisplayName("skeleton_horse_spawn");
-						ArrayList<String> horse_lore = new ArrayList<>();
-						horse_lore.add("Set whether Ghast");
-						horse_lore.add("fireball explosions");
-						horse_lore.add("can destroy blocks.");
-						horse_lore.add(" ");
-						horse_lore.add(""  + "false = no grief");
-						horse_meta.setLore(horse_lore);
-						btnHorse.setItemMeta(horse_meta);
-
-						ItemMeta horsetrue_meta = btnHorseTrue.getItemMeta();
-						horsetrue_meta.setDisplayName("Set skeleton_horse_spawn to True");
-						ArrayList<String> horsetrue_lore = new ArrayList<>();
-						//horsetrue_lore.add("Set skeleton_horse_spawn to True");
-						horsetrue_lore.add("Skeleton Horses will spawn.");
-						horsetrue_meta.setLore(horsetrue_lore);
-						btnHorseTrue.setItemMeta(horsetrue_meta);
-
-						ItemMeta horsefalse_meta = btnHorseFalse.getItemMeta();
-						horsefalse_meta.setDisplayName("Set skeleton_horse_spawn to False");
-						ArrayList<String> horsefalse_lore = new ArrayList<>();
-						//horsefalse_lore.add("Set skeleton_horse_spawn to False");
-						horsefalse_lore.add("Skeleton Horses will NOT spawn.");
-						horsefalse_meta.setLore(horsefalse_lore);
-						btnHorseFalse.setItemMeta(horsefalse_meta);
-
-
-
-						ItemMeta phantom_meta = btnPhantom.getItemMeta();
-						phantom_meta.setDisplayName("phantom_spawn");
-						ArrayList<String> phantom_lore = new ArrayList<>();
-						phantom_lore.add("Set whether Ghast");
-						phantom_lore.add("fireball explosions");
-						phantom_lore.add("can destroy blocks.");
-						phantom_lore.add(" ");
-						phantom_lore.add(""  + "false = no grief");
-						phantom_meta.setLore(phantom_lore);
-						btnPhantom.setItemMeta(phantom_meta);
-
-						ItemMeta phantomtrue_meta = btnPhantomTrue.getItemMeta();
-						phantomtrue_meta.setDisplayName("Set phantom_spawn to True");
-						ArrayList<String> phantomtrue_lore = new ArrayList<>();
-						//phantomtrue_lore.add("Set phantom_spawn to True");
-						phantomtrue_lore.add("Phantoms will spawn.");
-						phantomtrue_meta.setLore(phantomtrue_lore);
-						btnPhantomTrue.setItemMeta(phantomtrue_meta);
-
-						ItemMeta phantomfalse_meta = btnPhantomFalse.getItemMeta();
-						phantomfalse_meta.setDisplayName("Set phantom_spawn to False");
-						ArrayList<String> phantomfalse_lore = new ArrayList<>();
-						//phantomfalse_lore.add("Set phantom_spawn to False");
-						phantomfalse_lore.add("Phantoms will NOT spawn.");
-						phantomfalse_meta.setLore(phantomfalse_lore);
-						btnPhantomFalse.setItemMeta(phantomfalse_meta);
-
-
-
-						ItemMeta creeper_meta = btnCreeper.getItemMeta();
-						creeper_meta.setDisplayName("creeper_grief");
-						ArrayList<String> creeper_lore = new ArrayList<>();
-						creeper_lore.add("Set if Creeper");
-						creeper_lore.add("explosions can");
-						creeper_lore.add("destroy blocks.");
-						creeper_lore.add(" ");
-						creeper_lore.add(""  + "false = no grief");
-						creeper_meta.setLore(creeper_lore);
-						btnCreeper.setItemMeta(creeper_meta);
-
-						ItemMeta creepertrue_meta = btnCreeperTrue.getItemMeta();
-						creepertrue_meta.setDisplayName("Set creeper_grief to True");
-						ArrayList<String> creepertrue_lore = new ArrayList<>();
-						//creepertrue_lore.add("Set creeper_grief to True");
-						creepertrue_lore.add("Creeper Explosions will destroy blocks.");
-						creepertrue_meta.setLore(creepertrue_lore);
-						btnCreeperTrue.setItemMeta(creepertrue_meta);
-
-						ItemMeta creeperfalse_meta = btnCreeperFalse.getItemMeta();
-						creeperfalse_meta.setDisplayName("Set creeper_grief to False");
-						ArrayList<String> creeperfalse_lore = new ArrayList<>();
-						//creeperfalse_lore.add("Set creeper_grief to False");
-						creeperfalse_lore.add("Creeper Explosions will NOT destroy blocks.");
-						creeperfalse_meta.setLore(creeperfalse_lore);
-						btnCreeperFalse.setItemMeta(creeperfalse_meta);
-
-
-
-						ItemMeta save_meta = btnSave.getItemMeta();
-						save_meta.setDisplayName("Set configs and save.");
-						ArrayList<String> save_lore = new ArrayList<>();
-						//save_lore.add("Set configs and save.");
-						save_lore.add("Your current changes");
-						save_lore.add("will be set and saved");
-						save_lore.add("to getConfig().yml");
-						save_meta.setLore(save_lore);
-						btnSave.setItemMeta(save_meta);
-
-						ItemMeta cancel_meta = btnCancel.getItemMeta();
-						cancel_meta.setDisplayName("Cancel");
-						ArrayList<String> cancel_lore = new ArrayList<>();
-						cancel_lore.add("Cancel without setting");
-						cancel_lore.add("or saving.");
-						save_lore.add("Your current changes");
-						save_lore.add("will be lost.");
-						cancel_meta.setLore(cancel_lore);
-						btnCancel.setItemMeta(cancel_meta);
+					ItemMeta cancel_meta = btnCancel.getItemMeta();
+					cancel_meta.displayName(Component.text("Cancel"));
+					cancel_meta.lore(List.of(
+						Component.text("Cancel without setting"),
+						Component.text("or saving."),
+						Component.text("Your current changes"),
+						Component.text("will be lost.")
+					));
 
 
 
