@@ -148,13 +148,13 @@ public class NoEndermanGrief extends JavaPlugin implements Listener{
 				getConfig().set("debug", oldconfig.get("debug", false));
 				getConfig().set("lang", oldconfig.get("lang", "en_US"));
 				getConfig().set("console.longpluginname", oldconfig.get("console.longpluginname", true));
-				getConfig().set("enderman_grief", oldconfig.get("enderman_grief", false));
-				getConfig().set("skeleton_horse_spawn", oldconfig.get("skeleton_horse_spawn", false));
-				getConfig().set("creeper_grief", oldconfig.get("creeper_grief", false));
-				getConfig().set("wandering_trader_spawn", oldconfig.get("wandering_trader", false));
-				getConfig().set("ghast_grief", oldconfig.get("ghast_grief", false));
-				getConfig().set("phantom_spawn", oldconfig.get("phantom_spawn", false));
-				getConfig().set("pillager_patrol_spawn", oldconfig.get("pillager_patrol_spawn", false));
+				getConfig().set("enderman_grief", oldconfig.get("enderman_grief", true));
+				getConfig().set("skeleton_horse_spawn", oldconfig.get("skeleton_horse_spawn", true));
+				getConfig().set("creeper_grief", oldconfig.get("creeper_grief", true));
+				getConfig().set("wandering_trader_spawn", oldconfig.get("wandering_trader", true));
+				getConfig().set("ghast_grief", oldconfig.get("ghast_grief", true));
+				getConfig().set("phantom_spawn", oldconfig.get("phantom_spawn", true));
+				getConfig().set("pillager_patrol_spawn", oldconfig.get("pillager_patrol_spawn", true));
 				try {
 					getConfig().save(new File(getDataFolder(), "config.yml"));
 				} catch (Exception exception) {
