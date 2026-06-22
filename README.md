@@ -113,8 +113,8 @@ do_endcrystal_explode: true
 ## Requirements
 
 - **Minecraft Version:** 1.14+
-- **Server Software:** Paper 1.20.4+ (Spigot/Paper/Purpur)
-- **Java:** 21+
+- **Server Software:** Paper 26.1.2+ (Spigot/Paper/Purpur)
+- **Java:** 25+
 
 ## Installation
 

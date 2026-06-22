@@ -3,7 +3,7 @@ plugins {
 }
 
 group = 'com.github.drewburr'
-version = '2.0.2'
+version = '2.1.0'
 
 repositories {
     mavenCentral()
@@ -14,13 +14,13 @@ repositories {
 }
 
 dependencies {
-    compileOnly 'io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT'
+    compileOnly 'io.papermc.paper:paper-api:26.1.2.build.47-alpha'
     implementation 'commons-lang:commons-lang:2.6'
 }
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
+        languageVersion = JavaLanguageVersion.of(25)
     }
 }
 
@@ -36,7 +36,7 @@ processResources {
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
-    options.release = 21
+    options.release = 25
     options.compilerArgs << '-Xlint:deprecation'
 }
 

@@ -21,7 +21,7 @@ public class SnowGolemListener implements Listener {
 		try {
 			// Check if the entity is a snow golem and it's forming snow
 			if (event.getEntity() != null &&
-				event.getEntity().getType() == org.bukkit.entity.EntityType.SNOWMAN &&
+				event.getEntity().getType() == org.bukkit.entity.EntityType.SNOW_GOLEM &&
 				event.getNewState().getType() == Material.SNOW) {
 
 				if (!plugin.getConfig().getBoolean("do_snowgolem_snow_trail", true)) {

@@ -19,7 +19,7 @@ public class EndCrystalListener implements Listener {
 	@EventHandler
 	public void onEntityExplode(EntityExplodeEvent event) {
 		try {
-			if (event.getEntity().getType() == EntityType.ENDER_CRYSTAL) {
+			if (event.getEntity().getType() == EntityType.END_CRYSTAL) {
 				if(!plugin.getConfig().getBoolean("do_endcrystal_explode", true)){
 					event.blockList().clear();
 				}
